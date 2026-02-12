@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+:root {
+  /* Tropical Nordic Palette */
+  --bg-primary: #0F172A;
+  /* Slate 900 */
+  --bg-secondary: #1E293B;
+  /* Slate 800 */
+
+  --text-primary: #F8FAFC;
+  /* Slate 50 */
+  --text-secondary: #94A3B8;
+  /* Slate 400 */
+  --text-muted: #64748B;
+  /* Slate 500 */
+
+  --accent-gold: #E6BE6D;
+  /* Saffron Gold */
+  --accent-red: #B94E48;
+  /* Temple Red - Muted */
+
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.1);
+}
+
+@theme inline {
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+
+  --color-gold: var(--accent-gold);
+  --color-temple-red: var(--accent-red);
+
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+}
+
+/* Base Styles */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-secondary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}
+
+/* Tamil Font Support */
+.tamil-text {
+  font-family: 'Noto Sans Tamil', 'Latha', Arial, sans-serif;
+}
+
+/* Utility Classes */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.text-gold {
+  color: var(--accent-gold);
+}
+
+.text-temple-red {
+  color: var(--accent-red);
+}
+
+.border-gold {
+  border-color: var(--accent-gold);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  /* Prevent horizontal overflow on mobile */
+  overflow-x: hidden;
+  /* Add scroll padding for fixed header - prevents content from being hidden behind header */
+  scroll-padding-top: 80px;
+}
+
+/* Mobile-specific breakpoint (xs: 375px) */
+@media (min-width: 375px) {
+  .xs\:inline {
+    display: inline !important;
+  }
+  .xs\:hidden {
+    display: none !important;
+  }
+  .xs\:flex-row {
+    flex-direction: row !important;
+  }
+  .xs\:col-span-2 {
+    grid-column: span 2 / span 2 !important;
+  }
+  .xs\:ml-0 {
+    margin-left: 0 !important;
+  }
+  .xs\:items-center {
+    align-items: center !important;
+  }
+}
+
+/* Hide scrollbar for category filters on mobile */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Touch target minimum size for accessibility */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Prevent text selection on interactive elements for better mobile UX */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Improve text readability on mobile */
+@media (max-width: 640px) {
+  body {
+    font-size: 16px; /* Prevents iOS zoom on input focus */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Ensure inputs don't zoom on focus in iOS */
+  input, select, textarea {
+    font-size: 16px;
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
+
+/* Platinum Shine Effects */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-150%) skewX(-15deg);
+  }
+
+  100% {
+    transform: translateX(150%) skewX(-15deg);
+  }
+}
+
+@keyframes sparkle {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+  }
+}
+
+.platinum-border-glow {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.05);
+}
+
+.platinum-border-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(226, 232, 240, 0.0) 20%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(226, 232, 240, 0.0) 80%,
+      transparent 100%);
+  transform: translateX(-150%) skewX(-15deg);
+  animation: shimmer 3s infinite linear;
+  pointer-events: none;
+  z-index: 25;
+}
+
+/* Sparkle Elements */
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.8);
+  animation: sparkle 2s infinite ease-in-out;
+}
